@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.marcossousa.Categoria;
+import com.marcossousa.domain.Categoria;
 
 /**
  * @author Usuário
