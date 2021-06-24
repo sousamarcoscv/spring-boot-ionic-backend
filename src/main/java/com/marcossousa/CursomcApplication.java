@@ -13,6 +13,7 @@ import com.marcossousa.domain.Cidade;
 import com.marcossousa.domain.Cliente;
 import com.marcossousa.domain.Endereco;
 import com.marcossousa.domain.Estado;
+import com.marcossousa.domain.ItemPedido;
 import com.marcossousa.domain.Pagamento;
 import com.marcossousa.domain.PagamentoComBoleto;
 import com.marcossousa.domain.PagamentoComCartao;
@@ -25,9 +26,11 @@ import com.marcossousa.repositories.CidadeRepository;
 import com.marcossousa.repositories.ClienteRepository;
 import com.marcossousa.repositories.EnderecoRepository;
 import com.marcossousa.repositories.EstadoRepository;
+import com.marcossousa.repositories.ItemPedidoRepository;
 import com.marcossousa.repositories.PagamentoRepository;
 import com.marcossousa.repositories.PedidoRepository;
 import com.marcossousa.repositories.ProdutoRepository;
+
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner{
@@ -56,6 +59,8 @@ public class CursomcApplication implements CommandLineRunner{
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
 	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -122,6 +127,20 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().add(ip3);
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
 		
 		
 		
