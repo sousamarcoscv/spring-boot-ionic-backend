@@ -5,9 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.marcossousa.domain.Categoria;
 import com.marcossousa.domain.Cliente;
-import com.marcossousa.repositories.CategoriaRepository;
 import com.marcossousa.repositories.ClienteRepository;
 import com.marcossousa.services.exceptions.ObjectNotFoundException;
 
