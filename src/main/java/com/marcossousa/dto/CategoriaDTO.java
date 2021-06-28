@@ -4,8 +4,12 @@ import java.io.Serializable;
 
 import com.marcossousa.domain.Categoria;
 
+<<<<<<< HEAD
 public class CategoriaDTO implements Serializable{
 
+=======
+public class CategoriaDTO implements Serializable {
+>>>>>>> origin/master
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String nome;
@@ -34,5 +38,10 @@ public class CategoriaDTO implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+<<<<<<< HEAD
 	
 }
+=======
+
+}
+>>>>>>> origin/master
