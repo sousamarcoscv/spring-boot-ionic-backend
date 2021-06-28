@@ -69,11 +69,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(listDto);
 
 	}
-	
-<<<<<<< HEAD
-	
-=======
->>>>>>> origin/master
+
 	@RequestMapping(value="/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<CategoriaDTO>> findPage(
 			@RequestParam(value="page", defaultValue = "0") Integer page, 
@@ -86,10 +82,6 @@ public class CategoriaResource {
 
 	}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 
 	
 }
