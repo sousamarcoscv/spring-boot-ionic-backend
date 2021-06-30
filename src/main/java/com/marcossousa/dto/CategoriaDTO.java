@@ -2,11 +2,17 @@ package com.marcossousa.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import com.marcossousa.domain.Categoria;
 
 public class CategoriaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+
+	@Size(min = 5, max = 80 , message = "Campo Menor que 5 e Maior que 80")
+	@NotEmpty(message = "Campo Vazio")
 	private String nome;
 
 	public CategoriaDTO() {
