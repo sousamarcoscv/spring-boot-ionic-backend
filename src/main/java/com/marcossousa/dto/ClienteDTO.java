@@ -7,7 +7,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.marcossousa.domain.Cliente;
+import com.marcossousa.services.validation.ClienteUptade;
 
+@ClienteUptade
 public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
