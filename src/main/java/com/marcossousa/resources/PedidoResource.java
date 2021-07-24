@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.marcossousa.domain.Categoria;
 import com.marcossousa.domain.Pedido;
-import com.marcossousa.dto.CategoriaDTO;
 import com.marcossousa.services.PedidoService;
 
 /**
