@@ -15,11 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.marcossousa.domain.Cidade;
 import com.marcossousa.domain.Cliente;
 import com.marcossousa.domain.Endereco;
+import com.marcossousa.domain.enums.Perfil;
 import com.marcossousa.domain.enums.TipoCliente;
 import com.marcossousa.dto.ClienteDTO;
 import com.marcossousa.dto.ClienteNewDTO;
 import com.marcossousa.repositories.ClienteRepository;
 import com.marcossousa.repositories.EnderecoRepository;
+import com.marcossousa.security.UserSS;
+import com.marcossousa.services.exceptions.AuthorizathionException;
 import com.marcossousa.services.exceptions.DataIntegrityException;
 import com.marcossousa.services.exceptions.ObjectNotFoundException;
 
@@ -31,11 +34,18 @@ public class ClienteService {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder pe;
 
 	public Cliente find(Integer id) {
+
+		UserSS user = UserService.authenticated();
+
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizathionException("Acesso negado");
+		}
+
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
@@ -67,8 +77,7 @@ public class ClienteService {
 		try {
 			repo.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException(
-					"Não é possivel Deletear o cliente porque há pedidos relacionados");
+			throw new DataIntegrityException("Não é possivel Deletear o cliente porque há pedidos relacionados");
 		}
 
 	}
@@ -84,7 +93,7 @@ public class ClienteService {
 	}
 
 	public Cliente fromDTO(ClienteDTO objDto) {
-		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null,null);
+		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null, null);
 	}
 
 	public Cliente fromDTO(ClienteNewDTO objDto) {
